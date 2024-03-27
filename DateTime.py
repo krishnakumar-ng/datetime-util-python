@@ -1,22 +1,26 @@
 from DateTimeParser import DateTimeParser
 from DateTimeUtil import DateTimeUtil
+import json
 
 class DateTime:
 
     def printAllTime(dateTimeUtil):
-        print("Epoch                            :   ", dateTimeUtil.getEpochTime())
-        print("Epoch Milliseconds               :   ", dateTimeUtil.getEpochInMilli())
-        print("Epoch Nanoseconds                :   ", dateTimeUtil.getEpochInNano())
-        print("ISO Format                       :   ", dateTimeUtil.getTimeInIso())
-        print("ISO Format with timezone         :   ", dateTimeUtil.getTimeInIsoWithZone())
-        print("ISO Format in UTC                :   ", dateTimeUtil.getTimeInUtc())
-        print("ISO Format in IST                :   ", dateTimeUtil.getTimeInIst())
-        print("ISO Format in EST                :   ", dateTimeUtil.getTimeInEst())
-        print("ISO Format with 'Z'              :   ", dateTimeUtil.getTimeInIsoWithZ())
-        print("ISO Format with zone Offset      :   ", dateTimeUtil.getTimeInIsoWithZoneOffset())
-        print("ISO Format in UTC with 'Z'       :   ", dateTimeUtil.getTimeInUtcWithZ())
-        print("ISO Format in IST with 'Z'       :   ", dateTimeUtil.getTimeInIstWithZ())
-        print("ISO Format in EST with 'Z'       :   ", dateTimeUtil.getTimeInEstWithZ())
+        output = {
+        "Epoch": dateTimeUtil.getEpochTime(),
+        "Epoch Milliseconds": dateTimeUtil.getEpochInMilli(),
+        "Epoch Nanoseconds": dateTimeUtil.getEpochInNano(),
+        "ISO Format": dateTimeUtil.getTimeInIso(),
+        "ISO Format with timezone": dateTimeUtil.getTimeInIsoWithZone(),
+        "ISO Format in UTC": dateTimeUtil.getTimeInUtc(),
+        "ISO Format in IST": dateTimeUtil.getTimeInIst(),
+        "ISO Format in EST": dateTimeUtil.getTimeInEst(),
+        "ISO Format with 'Z'": dateTimeUtil.getTimeInIsoWithZ(),
+        "ISO Format with zone Offset": dateTimeUtil.getTimeInIsoWithZoneOffset(),
+        "ISO Format in UTC with 'Z'": dateTimeUtil.getTimeInUtcWithZ(),
+        "ISO Format in IST with 'Z'": dateTimeUtil.getTimeInIstWithZ(),
+        "ISO Format in EST with 'Z'": dateTimeUtil.getTimeInEstWithZ()
+        }
+        print(json.dumps(output, indent=4))
     
     if __name__ == "__main__":
         
