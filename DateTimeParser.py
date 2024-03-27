@@ -11,16 +11,17 @@ class DateTimeParser:
                 return datetime.now()
             
             elif input_time.isdigit():
-                # If input is a digit, assume it's epoch time in seconds
-                return datetime.fromtimestamp(int(input_time))
-            
-            elif input_time.isdigit() and len(input_time) == 13:
-                # If input is a 13-digit number, assume it's epoch time in milliseconds
-                return datetime.fromtimestamp(int(input_time) / 1000)
-            
-            elif input_time.isdigit() and len(input_time) == 19:
-                # If input is a 19-digit number, assume it's epoch time in nanoseconds
-                return datetime.fromtimestamp(int(input_time) / 1e9)
+
+                if len(input_time) == 13:
+                    # If input is a 13-digit number, assume it's epoch time in milliseconds
+                    return datetime.fromtimestamp(int(input_time) / 1000)
+                elif len(input_time) == 19:
+                    # If input is a 19-digit number, assume it's epoch time in nanoseconds
+                    # Divide by 1e6 to convert nanoseconds to milliseconds
+                    return datetime.fromtimestamp(int(input_time) / 1e9)
+                else:
+                    # If the input is not 13 or 19 digits, assume it's epoch time in seconds
+                    return datetime.fromtimestamp(int(input_time))
 
             else:
                 # Try to parse input time using various formats
