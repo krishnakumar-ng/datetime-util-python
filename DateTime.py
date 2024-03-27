@@ -1,5 +1,5 @@
-from DateTimeParser import DateTimeParser
-from DateTimeUtil import DateTimeUtil
+from util.DateTimeParser import DateTimeParser
+from util.DateTimeUtil import DateTimeUtil
 import json
 
 class DateTime:
