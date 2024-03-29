@@ -1,5 +1,5 @@
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 
 class DateTimeParser:
 
@@ -8,7 +8,7 @@ class DateTimeParser:
         try:
             # Try to parse input time as an integer (epoch time)
             if input_time.lower() == "now":
-                return datetime.now()
+                return datetime.now(timezone.utc)
             
             elif input_time.isdigit():
 
@@ -25,11 +25,13 @@ class DateTimeParser:
 
             else:
                 # Try to parse input time using various formats
-                formats = ['%Y-%m-%d %H:%M:%S', '%Y-%m-%dT%H:%M:%S', '%Y-%m-%dT%H:%M:%SZ', '%Y-%m-%dT%H:%M:%S%z', '%Y-%m-%d %H:%M:%S%z', '%Y-%m-%d %H:%M:%S.%f%z', '%Y-%m-%d %H:%M:%S.%f']
+                formats = ['%Y-%m-%d %H:%M:%S', '%Y-%m-%dT%H:%M:%S', '%Y-%m-%dT%H:%M:%SZ', 
+                           '%Y-%m-%dT%H:%M:%S%z', '%Y-%m-%d %H:%M:%S%z', '%Y-%m-%d %H:%M:%S.%f%z', 
+                           '%Y-%m-%d %H:%M:%S.%f', '%Y-%m-%dT%H:%M:%S%zZ', '%Y-%m-%dT%H:%M:%S.%f%z']
+
                 for format in formats:
                     try:
-                        parsed_time = datetime.strptime(input_time, format)
-                        return parsed_time
+                        return datetime.strptime(input_time, format).astimezone(timezone.utc)
                     except ValueError:
                         continue
                 

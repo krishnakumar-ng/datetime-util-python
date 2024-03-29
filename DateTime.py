@@ -6,9 +6,13 @@ class DateTime:
 
     def printAllTime(dateTimeUtil):
         output = {
-        "Epoch": dateTimeUtil.getEpochTime(),
+        "Epoch Current Time": dateTimeUtil.getEpochTime(),
         "Epoch Milliseconds": dateTimeUtil.getEpochInMilli(),
         "Epoch Nanoseconds": dateTimeUtil.getEpochInNano(),
+        "Epoch_Today_Start": dateTimeUtil.getEpochForStartOfTheDay(),
+        "Epoch_Today_End": dateTimeUtil.getEpochForEndOfTheDay(),
+        "Epoch_24_Hrs_Forward": dateTimeUtil.getEpochFor24HoursForward(),
+        "Epoch_24_Hrs_Back": dateTimeUtil.getEpochFor24HoursBack(),
         "ISO Format": dateTimeUtil.getTimeInIso(),
         "ISO Format with timezone": dateTimeUtil.getTimeInIsoWithZone(),
         "ISO Format in UTC": dateTimeUtil.getTimeInUtc(),
