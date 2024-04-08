@@ -107,3 +107,6 @@ class DateTimeUtil:
     def getEpochFor24HoursForward(self):
         twenty_four_hours_forward = self.time + timedelta(hours=24)
         return int(twenty_four_hours_forward.timestamp())
+    
+    def getWeekOfTheYear(self):
+        return (self.time.strftime("%U") if self.time.weekday() == 6 else int(self.time.strftime("%U")) + 1)

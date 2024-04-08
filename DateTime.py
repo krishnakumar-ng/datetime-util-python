@@ -22,7 +22,8 @@ class DateTime:
         "ISO Format with zone Offset": dateTimeUtil.getTimeInIsoWithZoneOffset(),
         "ISO Format in UTC with 'Z'": dateTimeUtil.getTimeInUtcWithZ(),
         "ISO Format in IST with 'Z'": dateTimeUtil.getTimeInIstWithZ(),
-        "ISO Format in EST with 'Z'": dateTimeUtil.getTimeInEstWithZ()
+        "ISO Format in EST with 'Z'": dateTimeUtil.getTimeInEstWithZ(),
+        "Week of the year": dateTimeUtil.getWeekOfTheYear()
         }
         print(json.dumps(output, indent=4))
     
