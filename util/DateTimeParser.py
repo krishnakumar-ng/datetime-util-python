@@ -1,14 +1,42 @@
 import sys
-from datetime import datetime, timezone
+import re
+from datetime import datetime, timezone, timedelta
 
 class DateTimeParser:
 
     @staticmethod
     def parse_input(input_time):
         try:
+            pattern = r'\b\d+\b'
+
             # Try to parse input time as an integer (epoch time)
             if input_time.lower() == "now":
                 return datetime.now(timezone.utc)
+            
+            elif input_time.lower().startswith("add"):
+
+                integer = int(re.search(pattern, input_time).group())
+                
+
+                if input_time.lower().endswith("days"):
+                    time = datetime.now(timezone.utc) + timedelta(days=integer)
+                if input_time.lower().endswith("minutes"):
+                    time = datetime.now(timezone.utc) + timedelta(minutes=integer)
+                if input_time.lower().endswith("hours"):
+                    time = datetime.now(timezone.utc) + timedelta(hours=integer)
+                return time
+
+            elif input_time.lower().startswith("subtract"):
+
+                integer = int(re.search(pattern, input_time).group())
+
+                if input_time.lower().endswith("days"):
+                    time = datetime.now(timezone.utc) + timedelta(days=-integer)
+                if input_time.lower().endswith("minutes"):
+                    time = datetime.now(timezone.utc) + timedelta(minutes=-integer)
+                if input_time.lower().endswith("hours"):
+                    time = datetime.now(timezone.utc) + timedelta(hours=-integer)
+                return time
             
             elif input_time.isdigit():
 
