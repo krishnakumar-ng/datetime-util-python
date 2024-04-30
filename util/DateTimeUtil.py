@@ -9,9 +9,13 @@ class DateTimeUtil:
         # Determine if current date is within daylight saving time period (2nd Sunday of March to 1st Sunday of November)
         # Determine the offset for Eastern Time (ET)
         if datetime(self.time.year, 3, 8) <= self.time.replace(tzinfo=None) < datetime(self.time.year, 11, 1):
-            self.est_offset = -4  # Daylight Saving Time (EDT) = UTC-4
+            self.est_offset = -4  # Eastern Daylight Time (EDT) = UTC-4
+            self.pst_offset = -7 # Pacific Daylight Time (PDT) = UTC-7
+            self.eet_offset = 3 # Eastern European Time (EET) = UTC+3
         else:
-            self.est_offset = -5  # Standard Time (EST) = UTC-5
+            self.est_offset = -5  # Eastern Standard Time (EST) = UTC-5
+            self.pst_offset = -8 # Pacific Standard Time (PST) = UTC-8
+            self.eet_offset = 2 # Eastern European Summer Time (EEST) = UTC+2
 
     '''
     Convert to Epoch time (seconds)
@@ -62,6 +66,18 @@ class DateTimeUtil:
         return self.time.astimezone(timezone(timedelta(hours=self.est_offset))).isoformat()
 
     '''
+    Convert to ISO 8601 format in Pacific Standard Time (PST)
+    '''
+    def getTimeInPst(self):
+        return self.time.astimezone(timezone(timedelta(hours=self.pst_offset))).isoformat()
+
+    '''
+    Convert to ISO 8601 format in Eastern European Time (EET)
+    '''
+    def getTimeInEet(self):
+        return self.time.astimezone(timezone(timedelta(hours=self.eet_offset))).isoformat()
+
+    '''
     Convert to ISO 8601 format with 'Z'
     '''
     def getTimeInIsoWithZ(self):
@@ -80,17 +96,28 @@ class DateTimeUtil:
         return self.time.astimezone(timezone.utc).isoformat() + 'Z'
     
     '''
-    Convert to ISO 8601 format in UTC with 'Z'
+    Convert to ISO 8601 format in IST with 'Z'
     '''
     def getTimeInIstWithZ(self):
         return self.time.astimezone(timezone(timedelta(hours=5,minutes=30))).isoformat() + 'Z'
     
     '''
-    Convert to ISO 8601 format in UTC with 'Z'
+    Convert to ISO 8601 format in EST with 'Z'
     '''
     def getTimeInEstWithZ(self):
         return self.time.astimezone(timezone(timedelta(hours=self.est_offset))).isoformat() + 'Z'
     
+    '''
+    Convert to ISO 8601 format in PST with 'Z'
+    '''
+    def getTimeInPstWithZ(self):
+        return self.time.astimezone(timezone(timedelta(hours=self.pst_offset))).isoformat() + 'Z'
+
+    '''
+    Convert to ISO 8601 format in EET with 'Z'
+    '''
+    def getTimeInEetWithZ(self):
+        return self.time.astimezone(timezone(timedelta(hours=self.eet_offset))).isoformat() + 'Z'
 
     def getEpochForStartOfTheDay(self):
         start_of_day = datetime(self.time.year, self.time.month, self.time.day, 0, 0, 0)
