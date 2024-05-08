@@ -136,4 +136,7 @@ class DateTimeUtil:
         return int(twenty_four_hours_forward.timestamp())
     
     def getWeekOfTheYear(self):
-        return (self.time.strftime("%U") if self.time.weekday() == 6 else int(self.time.strftime("%U")) + 1)
+        dayOfYear = (31, 28 + (self.time.year % 4 == 0 and (self.time.year % 100 != 0 or self.time.year % 400 == 0)), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+        daysCount = sum(dayOfYear[:self.time.month - 1]) + self.time.day
+        weekNumber = (daysCount - 1) // 7 + 1
+        return weekNumber-1 if weekNumber == 53 else weekNumber
