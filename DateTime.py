@@ -40,7 +40,7 @@ class DateTime:
               "3. Enter add X mins/hours/days/weeks/yrs to add X to the current time\n"
               "4. Enter subtract/sub X mins/hours/days/weeks/yrs to subtract X from the current time\n")
         
-        input_time = input()
+        input_time = input("Enter the input time in one of the above format: ")
         
         time = DateTimeParser.parse_input(input_time)
 
